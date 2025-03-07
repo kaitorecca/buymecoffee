@@ -3,11 +3,11 @@ const ethers = require("ethers");
 const app = express();
 app.use(express.json());
 
-// Cấu hình RPC cho Electroneum Testnet
-const rpcUrl = "YOUR_ANKR_RPC_URL_HERE"; // Lấy từ https://www.ankr.com/rpc/?utm_referral=Electroneum2025
+// Configure RPC for Electroneum Testnet
+const rpcUrl = "YOUR_ANKR_RPC_URL_HERE"; // Get from https://www.ankr.com/rpc/?utm_referral=Electroneum2025
 const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 
-// Địa chỉ hợp đồng ElectroTipV4
+// ElectroTipV4 contract address
 const contractAddress = "YOUR_CONTRACT_ADDRESS_HERE";
 const abi = [
     {"inputs":[{"internalType":"address payable","name":"_creator","type":"address"},{"internalType":"string","name":"_userId","type":"string"}],"name":"sendTip","outputs":[],"stateMutability":"payable","type":"function"},
@@ -19,25 +19,25 @@ app.post("/tip-notify", async (req, res) => {
     const { user_id, creator_wallet, amount, tx_hash } = req.body;
 
     try {
-        // Lấy thông tin giao dịch từ blockchain
+        // Get transaction information from the blockchain
         const txReceipt = await provider.getTransactionReceipt(tx_hash);
         if (!txReceipt) {
             return res.status(400).json({ error: "Transaction not found" });
         }
 
-        // Kiểm tra giao dịch có liên quan đến hợp đồng không
+        // Check if the transaction is related to the contract
         if (txReceipt.to.toLowerCase() !== contractAddress.toLowerCase()) {
             return res.status(400).json({ error: "Transaction not sent to ElectroTip contract" });
         }
 
-        // Lấy log sự kiện TipSent từ giao dịch
+        // Get the TipSent event log from the transaction
         const logs = txReceipt.logs.map(log => contract.interface.parseLog(log));
         const tipEvent = logs.find(log => log && log.name === "TipSent");
         if (!tipEvent) {
             return res.status(400).json({ error: "No TipSent event found in transaction" });
         }
 
-        // Xác minh dữ liệu từ callback
+        // Verify data from the callback
         const eventSender = tipEvent.args.sender;
         const eventCreator = tipEvent.args.creator;
         const eventAmount = ethers.utils.formatEther(tipEvent.args.amount);
@@ -51,7 +51,7 @@ app.post("/tip-notify", async (req, res) => {
             return res.status(400).json({ error: "Callback data does not match blockchain record" });
         }
 
-        // Nếu mọi thứ khớp, log giao dịch
+        // If everything matches, log the transaction
         console.log("Valid tip received:", {
             user_id,
             creator_wallet,
