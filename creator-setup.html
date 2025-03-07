@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroTip - Create Your Tip Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <img alt="Icon Picture" height="40" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/08aea422-eab9-428b-82c9-9c04e411bb8c/dbf6otc-01c5d677-8fcc-4513-aeb0-66ac580446c7.jpg/v1/fit/w_800,h_566,q_70,strp/flat_coffee_cup_icon_by_superawesomevectors_dbf6otc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTY2IiwicGF0aCI6IlwvZlwvMDhhZWE0MjItZWFiOS00MjhiLTgyYzktOWMwNGU0MTFiYjhjXC9kYmY2b3RjLTAxYzVkNjc3LThmY2MtNDUxMy1hZWIwLTY2YWM1ODA0NDZjNy5qcGciLCJ3aWR0aCI6Ijw9ODAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.ef0Wcwwrr53djpAiWK5Lf08akocBB-owX0YEmeu7fxg" width="90"/>
+        <span class="font-medium text-lg">
+          ElectroTip Setup
+        </span>
+      </div>
+    </div>
+  </header>
+  
+  <main class="container mx-auto px-4 py-8">
+    <div class="bg-blue-50 rounded-lg p-6 max-w-3xl mx-auto">
+      <h1 class="text-2xl font-bold mb-6 text-center">Create Your ElectroTip Link</h1>
+      
+      <div class="bg-white rounded-lg shadow p-6 mb-6">
+        <form id="setupForm" class="space-y-4">
+          <div>
+            <label for="walletAddress" class="block text-sm font-medium text-gray-700 mb-1">Your ETN Wallet Address</label>
+            <input type="text" id="walletAddress" name="walletAddress" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0x..." required>
+            <p class="text-sm text-gray-500 mt-1">This is where you'll receive your ETN tips</p>
+          </div>
+          
+          <div>
+            <label for="creatorName" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input type="text" id="creatorName" name="creatorName" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your name or nickname" required>
+          </div>
+          
+          <div>
+            <label for="userId" class="block text-sm font-medium text-gray-700 mb-1">Default User ID (optional)</label>
+            <input type="text" id="userId" name="userId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Default identifier for your supporters">
+            <p class="text-sm text-gray-500 mt-1">Your supporters can change this when they send a tip</p>
+          </div>
+          
+          <div>
+            <label for="callbackUrl" class="block text-sm font-medium text-gray-700 mb-1">Callback URL (optional)</label>
+            <input type="url" id="callbackUrl" name="callbackUrl" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://your-website.com/callback">
+            <p class="text-sm text-gray-500 mt-1">We'll send transaction details to this URL when someone tips you</p>
+          </div>
+          
+          <div>
+            <label for="baseUrl" class="block text-sm font-medium text-gray-700 mb-1">Base URL</label>
+            <select id="baseUrl" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="https://buymecoffee-electroneum.pages.dev">buymecoffee-electroneum.pages.dev</option>
+              <option value="http://localhost:5500">localhost:5500</option>
+              <option value="custom">Custom...</option>
+            </select>
+          </div>
+          
+          <div id="customUrlContainer" class="hidden">
+            <label for="customUrl" class="block text-sm font-medium text-gray-700 mb-1">Custom Base URL</label>
+            <input type="url" id="customUrl" name="customUrl" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://your-site.com">
+          </div>
+          
+          <div class="pt-4">
+            <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              Generate ElectroTip Link
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div id="resultSection" class="bg-white rounded-lg shadow p-6 hidden">
+        <h2 class="text-xl font-semibold mb-4">Your ElectroTip Link</h2>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Link URL</label>
+          <div class="flex">
+            <input id="generatedLink" type="text" readonly class="w-full border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50">
+            <button onclick="copyToClipboard('generatedLink')" class="bg-gray-200 px-4 rounded-r-lg hover:bg-gray-300">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">HTML Button Code</label>
+          <div class="flex">
+            <textarea id="htmlCode" rows="3" readonly class="w-full border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-sm font-mono"></textarea>
+            <button onclick="copyToClipboard('htmlCode')" class="bg-gray-200 px-4 rounded-r-lg hover:bg-gray-300">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Markdown Code</label>
+          <div class="flex">
+            <textarea id="markdownCode" rows="2" readonly class="w-full border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-sm font-mono"></textarea>
+            <button onclick="copyToClipboard('markdownCode')" class="bg-gray-200 px-4 rounded-r-lg hover:bg-gray-300">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <h3 class="text-lg font-medium mb-2">Preview</h3>
+          <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+            <div id="previewButton" class="inline-block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="bg-white py-6 mt-8">
+    <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+      <div class="flex justify-center space-x-4 mb-4">
+        <a class="hover:underline" href="#">Privacy</a>
+        <a class="hover:underline" href="#">Terms</a>
+        <a class="hover:underline" href="#">Help</a>
+      </div>
+      <p>© 2023 ElectroTip - Buy me a Coffee with Electroneum</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Show/hide custom URL field based on selection
+    document.getElementById('baseUrl').addEventListener('change', function() {
+      const customUrlContainer = document.getElementById('customUrlContainer');
+      if (this.value === 'custom') {
+        customUrlContainer.classList.remove('hidden');
+      } else {
+        customUrlContainer.classList.add('hidden');
+      }
+    });
+    
+    // Form submission handler
+    document.getElementById('setupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const walletAddress = document.getElementById('walletAddress').value.trim();
+      const creatorName = document.getElementById('creatorName').value.trim();
+      const userId = document.getElementById('userId').value.trim();
+      const callbackUrl = document.getElementById('callbackUrl').value.trim();
+      
+      // Get base URL
+      let baseUrl;
+      if (document.getElementById('baseUrl').value === 'custom') {
+        baseUrl = document.getElementById('customUrl').value.trim();
+      } else {
+        baseUrl = document.getElementById('baseUrl').value;
+      }
+      
+      // Validate wallet address (basic validation)
+      if (!walletAddress.startsWith('0x') || walletAddress.length !== 42) {
+        alert('Please enter a valid ETH wallet address (starts with 0x and 42 characters long)');
+        return;
+      }
+      
+      // Generate link parameters
+      const params = new URLSearchParams();
+      params.append('wallet_id', walletAddress);
+      params.append('creator_name', encodeURIComponent(creatorName));
+      if (userId) params.append('user_id', encodeURIComponent(userId));
+      if (callbackUrl) params.append('callback_url', encodeURIComponent(callbackUrl));
+      
+      // Generate full URL
+      let pagePath = baseUrl;
+      if (!pagePath.endsWith('/')) pagePath += '/';
+      pagePath += 'index.html';
+      
+      const fullUrl = `${pagePath}?${params.toString()}`;
+      
+      // Generate HTML code
+      const buttonText = `Support ${creatorName} with ETN`;
+      const htmlCode = `<a href="${fullUrl}" target="_blank" style="display:inline-block;background:#1d4ed8;color:white;font-family:Arial,sans-serif;font-weight:bold;padding:10px 20px;border-radius:6px;text-decoration:none;">☕ ${buttonText}</a>`;
+      
+      // Generate Markdown code
+      const markdownCode = `[☕ ${buttonText}](${fullUrl})`;
+      
+      // Display results
+      document.getElementById('generatedLink').value = fullUrl;
+      document.getElementById('htmlCode').value = htmlCode;
+      document.getElementById('markdownCode').value = markdownCode;
+      
+      // Show preview
+      document.getElementById('previewButton').innerHTML = htmlCode;
+      
+      // Show result section
+      document.getElementById('resultSection').classList.remove('hidden');
+      
+      // Scroll to result section
+      document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Copy to clipboard function
+    function copyToClipboard(elementId) {
+      const element = document.getElementById(elementId);
+      element.select();
+      document.execCommand('copy');
+      
+      // Show temporary "Copied!" tooltip
+      const button = element.nextElementSibling;
+      const originalIcon = button.innerHTML;
+      button.innerHTML = '<span class="text-xs">Copied!</span>';
+      setTimeout(() => {
+        button.innerHTML = originalIcon;
+      }, 1000);
+    }
+    
+    // Check if wallet address is valid (basic validation)
+    document.getElementById('walletAddress').addEventListener('input', function() {
+      const walletAddress = this.value.trim();
+      if (walletAddress && (!walletAddress.startsWith('0x') || walletAddress.length !== 42)) {
+        this.classList.add('border-red-500');
+      } else {
+        this.classList.remove('border-red-500');
+      }
+    });
+    
+    // Add validation for optional URL fields
+    document.getElementById('callbackUrl').addEventListener('input', function() {
+      const url = this.value.trim();
+      if (url && !url.match(/^https?:\/\/.+/)) {
+        this.classList.add('border-red-500');
+      } else {
+        this.classList.remove('border-red-500');
+      }
+    });
+    
+    document.getElementById('customUrl').addEventListener('input', function() {
+      const url = this.value.trim();
+      if (url && !url.match(/^https?:\/\/.+/)) {
+        this.classList.add('border-red-500');
+      } else {
+        this.classList.remove('border-red-500');
+      }
+    });
+  </script>
+</body>
+</html>

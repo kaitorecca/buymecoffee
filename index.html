@@ -1,0 +1,313 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   ElectroTip - Buy me a Coffee with Electroneum
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    #status { margin-top: 20px; color: green; }
+    #error { margin-top: 20px; color: red; }
+</style>
+ </head>
+ <body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow-sm">
+   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+     <img alt="Icon Picture" height="40" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/08aea422-eab9-428b-82c9-9c04e411bb8c/dbf6otc-01c5d677-8fcc-4513-aeb0-66ac580446c7.jpg/v1/fit/w_800,h_566,q_70,strp/flat_coffee_cup_icon_by_superawesomevectors_dbf6otc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTY2IiwicGF0aCI6IlwvZlwvMDhhZWE0MjItZWFiOS00MjhiLTgyYzktOWMwNGU0MTFiYjhjXC9kYmY2b3RjLTAxYzVkNjc3LThmY2MtNDUxMy1hZWIwLTY2YWM1ODA0NDZjNy5qcGciLCJ3aWR0aCI6Ijw9ODAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.ef0Wcwwrr53djpAiWK5Lf08akocBB-owX0YEmeu7fxg" width="90"/>
+     <span class="font-medium text-lg">
+      ElectroTip
+     </span>
+    </div>
+   </div>
+  </header>
+  <main class="container mx-auto px-4 py-8">
+   <div class="bg-blue-50 rounded-lg p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <!-- About Section -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">
+       You could buy me a Coffee with Electroneum
+      </h2>
+      <h4 class="text-lg mb-4">
+        Send a tip to: <span id="creatorWallet">Loading...</span>
+       </h4>
+       <p id="status"></p>
+       <p id="error" style="color:red"></p>
+      <hr class="my-6"/>
+      <div class="bg-blue-50 rounded-lg p-4 text-center">
+       <i class="fas fa-heart text-blue-500 text-xl">
+       </i>
+       <p class="text-blue-500 mt-2">
+        Be one of great people to support me.
+       </p>
+      </div>
+     </div>
+     <!-- Support Section -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">
+       Support <span id="creatorname">me</span>
+      </h2>
+      <div class="mb-4">
+       <label class="sr-only" for="amount">
+        Enter amount
+       </label>
+       <div class="flex items-center space-x-2">
+        <input class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="amount" placeholder="ETN Enter amount" type="number" step="0.01"/>
+        <button class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg" onclick="addAmount(25)">
+         +25
+        </button>
+        <button class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg" onclick="addAmount(50)">
+         +50
+        </button>
+        <button class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg" onclick="addAmount(100)">
+         +100
+        </button>
+       </div>
+      </div>
+      <div class="mb-4">
+       <label class="sr-only" for="name">
+        Name or @yoursocial
+       </label>
+       <input class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="userId" placeholder="Name or @yoursocial" type="text"/>
+      </div>
+      <div class="mb-4 relative">
+       <label class="sr-only" for="message">
+        Say something nice...
+       </label>
+       <textarea class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="message" placeholder="Say something nice..."></textarea>
+       <button class="absolute bottom-2 right-2 text-gray-500">
+        <i class="fas fa-paperclip">
+        </i>
+       </button>
+      </div>
+      <button onclick="sendTip()" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+       Support
+      </button>
+     </div>
+    </div>
+   </div>
+  </main>
+  <footer class="bg-white py-6 mt-8">
+   <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+    <div class="flex justify-center space-x-4 mb-4">
+     <a class="hover:underline" href="#">
+      English
+     </a>
+     <a class="hover:underline" href="#">
+      Privacy
+     </a>
+     <a class="hover:underline" href="#">
+      Terms
+     </a>
+     <a class="hover:underline" href="#">
+      Report
+     </a>
+    </div>
+    <a class="text-blue-500 hover:underline" href="#">
+     Start your Buy Me a Coffee page &gt;
+    </a>
+   </div>
+  </footer>
+  
+  <script>
+    function addAmount(value) {
+      const amountInput = document.getElementById('amount');
+      // Get the current value, remove any non-numeric characters except decimal point
+      let currentValue = amountInput.value.replace(/[^\d.]/g, '');
+      
+      // If the field is empty or not a valid number, start with 0
+      if (currentValue === '' || isNaN(parseFloat(currentValue))) {
+        currentValue = '0';
+      }
+      
+      // Add the new value
+      const newValue = parseFloat(currentValue) + value;
+      
+      // Update the input field with a dollar sign
+      amountInput.value = newValue;
+    }
+  </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+   <script>
+       const contractAddress = "0x70293E1453673778B32b38930327b5b7890bC8e2";
+        const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_creator",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_userId",
+				"type": "string"
+			}
+		],
+		"name": "sendTip",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "userId",
+				"type": "string"
+			}
+		],
+		"name": "TipSent",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_sender",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "getTipsReceived",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "tipsReceived",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+
+       let provider, signer, contract;
+
+       // Lấy wallet_id và user_id từ URL
+       const urlParams = new URLSearchParams(window.location.search);
+       const creatorWallet = urlParams.get("wallet_id") || "0x0";
+       const userId = urlParams.get("user_id") || "Anonymous";
+       const creatorName = urlParams.get("creator_name") || "me";
+       document.getElementById("creatorWallet").innerText = creatorWallet;
+       document.getElementById("userId").value = userId;
+       document.getElementById("creatorname").innerText = creatorName;
+
+       // Kiểm tra wallet_id hợp lệ
+       if (!ethers.utils.isAddress(creatorWallet)) {
+           document.getElementById("error").innerText = "Invalid wallet address in URL!";
+           document.querySelector("button").disabled = true;
+       }
+
+       async function connectWallet() {
+           if (window.ethereum) {
+               provider = new ethers.providers.Web3Provider(window.ethereum);
+               await provider.send("eth_requestAccounts", []);
+               signer = provider.getSigner();
+               contract = new ethers.Contract(contractAddress, abi, signer);
+           } else {
+               alert("Please install MetaMask!");
+           }
+       }
+
+       async function sendTip() {
+           try {
+               await connectWallet();
+               const amount = document.getElementById("amount").value;
+               if (!amount || amount <= 0) {
+                   document.getElementById("error").innerText = "Please enter a valid amount!";
+                   return;
+               }
+
+               document.getElementById("status").innerText = "Sending tip...";
+               document.getElementById("error").innerText = "";
+
+               const tx = await contract.sendTip(creatorWallet, userId, {
+                   value: ethers.utils.parseEther(amount)
+               });
+               const receipt = await tx.wait();
+
+               document.getElementById("status").innerText = `Tip sent: ${amount} ETN! Confirmed in ~5 seconds! Thank you`;
+
+               // Gửi callback đến một URL (giả lập)
+               const callbackUrl = urlParams.get("callback_url");
+               if (callbackUrl) {
+                   const callbackData = {
+                       user_id: userId,
+                       creator_wallet: creatorWallet,
+                       amount: amount,
+                       tx_hash: receipt.transactionHash,
+                       timestamp: new Date().toISOString()
+                   };
+                   try {
+                       await fetch(callbackUrl, {
+                           method: "POST",
+                           headers: { "Content-Type": "application/json" },
+                           body: JSON.stringify(callbackData)
+                       });
+                   } catch (fetchError) {
+                       console.log("Callback fetch error:", fetchError);
+                   }
+               }
+               
+           } catch (error) {
+               document.getElementById("error").innerText = "Error: " + error.message;
+               document.getElementById("status").innerText = "";
+           }
+       }
+   </script>
+ </body>
+</html>
